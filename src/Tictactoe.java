@@ -15,7 +15,7 @@ public class Tictactoe{
 
         Dimension windowDimension = new Dimension(250, 275);
         JPanel menu = new JPanel();
-        menu.setPrefferedSize(windowDimension);
+        //menu.setPrefferedSize(windowDimension);
         menu.setMaximumSize(windowDimension);
 
         JButton start = new JButton("start");
@@ -23,9 +23,9 @@ public class Tictactoe{
 
 
         window = new JFrame();
-        window.getContent().add(start, exit);
+        //window.getContent().add(start, exit);
     }
-
+/*
     public static void main(String[] args){
         javax.swing.SwingUtilities.invokeLater(new Runnable(){
             public void run(){
@@ -33,4 +33,6 @@ public class Tictactoe{
             }
         });
     }
+
+ */
 }
