@@ -46,7 +46,14 @@ public class TTT implements ActionListener{
         exit = new JButton("Exit");
         exit.setFont(new Font("Arial", Font.BOLD, 15));
         exit.setSize(50, 25);
-        exit.addActionListener(this);
+        //exit.addActionListener(this);
+        exit.addActionListener(new ActionListener(){
+           @Override
+           public void actionPerformed(ActionEvent e){
+               System.out.println("wewnetrzny event");
+               window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
+           }
+        });
 
         //BufferedImage myPicture = ImageIO.read(new File("C:\\Users\\Marvin\\IdeaProjects\\tictactoe-swing\\src\\ttt.png"));
         //ImageIcon im = new ImageIcon("C:\\Users\\Marvin\\IdeaProjects\\tictactoe-swing\\src\\ttt.png");
