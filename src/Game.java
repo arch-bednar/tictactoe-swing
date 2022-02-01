@@ -30,7 +30,7 @@ public class Game {
     }
     private class Cell extends JPanel{ //as Pane in javafx
         boolean isFilled = false;
-        Line2D.Double line = new Line2D.Double(0,0,10,10);
+
         Cell(){
             addMouseListener(new MouseAdapter(){ //this.setOnMousePressed(new EventHandler<MouseEvent>(){ in FX
                 @Override

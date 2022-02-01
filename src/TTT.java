@@ -17,6 +17,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Ellipse2D;
 import java.util.Random;
 
+
 public class TTT implements ActionListener{
 
     private Cell[][] fields = new Cell[3][3];
@@ -63,10 +64,11 @@ public class TTT implements ActionListener{
         //ImageIcon im = new ImageIcon("C:\\Users\\Marvin\\IdeaProjects\\tictactoe-swing\\src\\ttt.png");
 
         BufferedImage myPicture = ImageIO.read(new File("C:\\Users\\Marvin\\IdeaProjects\\tictactoe-swing\\src\\ttt.png"));
-        JLabel picLabel = new JLabel(new ImageIcon(new ImageIcon(myPicture).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT)));
+        Image myImage = new ImageIcon(myPicture).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT);
+        JLabel picLabel = new JLabel(new ImageIcon(myImage));
 
 
-        Container logo = new JPanel();
+        JPanel logo = new JPanel();
         logo.add(picLabel);
 
 
@@ -116,7 +118,6 @@ public class TTT implements ActionListener{
         Container grid = new Container();
 
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-        //Container container = new Container();
         GridBagLayout bagLayout = new GridBagLayout();
         GridBagConstraints bagConstraints = new GridBagConstraints();
 
@@ -165,31 +166,9 @@ public class TTT implements ActionListener{
             constraints.gridx = i;
             for(int j=0; j<3; j++){
                 constraints.gridy = j;
-                //constraints.weightx = 85;
-                //constraints.weighty = 85;
                 container.add(fields[i][j], constraints);
-//                layout.setConstraints(fields[i][j], constraints);
-//                container.add(fields[i][j]);
             }
         }
-
-
-        JButton quit = new JButton("Quit");
-        constraints.gridx=1;
-        constraints.gridy=3;
-        //constraints.weightx=3;
-        //container.add((quit), constraints);
-        //layout.setConstraints(quit, constraints);
-        //container.add(quit);
-
-        /*
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        container.add(new Cell(), constraints);
-        */
-
-        //panel.add(container);
     }
 
     private class Cell extends JPanel{
@@ -316,11 +295,13 @@ public class TTT implements ActionListener{
             this.setBackground(Color.WHITE);
         }
 
-
+        @Override
         public void paintComponent(Graphics g){
-            super.paintComponent(g); //REQUIRED!!!! IF BE NOT USED THEN WILL HAVE ERRORS AND REFRESHING DOESN'T WORK CORRECTLY
+            super.paintComponent(g);
 
             Graphics2D g2d = (Graphics2D) g;
+
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             if(field == 'X'){
                 g2d.setStroke(new BasicStroke(5));
                 Line2D.Double lineOne = new Line2D.Double(0, 0, 85, 85);
@@ -343,8 +324,6 @@ public class TTT implements ActionListener{
         Container cont = winner.getContentPane();
         JLabel label = new JLabel(sign + " has won!");
         label.setFont(new Font("Arial", Font.BOLD, 25));
-        //cont.setLayout();
-        //label.setAlignmentX(5);
         cont.add(label);
         winner.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         winner.setVisible(true);
@@ -430,9 +409,6 @@ public class TTT implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == pvp){
-            //System.out.println("dupa");
-            //window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            //window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
             window.dispose();
             turn=1;
             mode=0;
@@ -443,7 +419,7 @@ public class TTT implements ActionListener{
             });
 
         } else if (e.getSource() == pvc){
-            //System.out.println("automatyczna dupa");
+            //window.dispose();
             turn=2;
             mode=1;
             EventQueue.invokeLater(new Runnable(){
@@ -452,8 +428,6 @@ public class TTT implements ActionListener{
                 }
             });
 
-        }else if(e.getSource() == exit){
-            window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
         }
     }
 
